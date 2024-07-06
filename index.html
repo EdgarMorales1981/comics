@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D'Abreu Comics</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <img src="images/MDA.png" alt="D'Abreu Comics" class="logo">
+</header>
+<main>
+    <section class="intro">
+        <p>
+            Miguel de Abreu comenzó a dibujar desde los 5 años de manera innata. A la edad de 20 años creó su primer personaje, Ginger Boy, un pelirrojo que se metía en muchos líos. En 2022, a sus 44 años, lanzó oficialmente Ginger Boy (ahora convertido en superhéroe). Desde entonces, ha creado un sinfín de cómics con temáticas diversas, incluyendo suspenso, comedia y eróticas, todas disponibles en la página.
+        </p>
+    </section>
+    <section class="gallery">
+        <div class="gallery-item">
+            <img src="images/presentacion.jpg" alt="Presentación">
+        </div>
+        <div class="gallery-item">
+            <img src="images/brunoBrunner.jpg" alt="Bruno Brunner">
+        </div>
+    </section>
+    <section class="downloads">
+        <div class="download-item">
+            <h2><img src="images/brunoBrunner.jpg" alt="Nuevo" class="section-icon"> Nuevo!!!</h2>
+            <ul class="dropdown-content">
+                <li><a href="nuevo/brunoBrunner.jpg" download>Bruno Brunner</a></li>
+                <!-- Agrega más enlaces aquí -->
+            </ul>
+        </div>
+        <div class="download-item">
+            <h2><img src="images/queers.png" alt="Ciclo Queer" class="section-icon"> Ciclo Queer</h2>
+            <ul class="dropdown-content">
+                <li><a href="Queers/SimonX%231.pdf">Ciclo Queer 1</a></li>
+                <li><a href="Queers/Queerx2.pdf">Ciclo Queer 2</a></li>
+            </ul>
+        </div>
+        <div class="download-item">
+            <h2><img src="images/familiar.png" alt="Toda la Familia" class="section-icon"> Toda la Familia</h2>
+            <ul class="dropdown-content">
+                <li><a href="Familiar/The%20Thomsons%20%231.pdf" download>The Thomsons 1</a></li>
+                <li><a href="Familiar/The%20Thomsons%20%232.pdf" download>The Thomsons 2</a></li>
+                <!-- Agrega más enlaces aquí -->
+            </ul>
+        </div>
+        <div class="download-item">
+            <h2><img src="images/comedias+16.png" alt="Comedias +16" class="section-icon"> Comedias +16</h2>
+            <ul class="dropdown-content">
+                <li><a href="comedias+16/Fabio%20Liebre%20%231.pdf" download>Fabio Liebre 1</a></li>
+                <li><a href="comedias+16/Fabio%20Liebre%20%232.pdf" download>Fabio Liebre 2</a></li>
+                <li><a href="comedias+16/RyanBryan.pdf" download>Ryan y Bryan</a></li>
+            </ul>
+        </div>
+        <div class="download-item">
+            <h2><img src="images/gingerBoy.png" alt="Ginger Boy" class="section-icon"> Ginger Boy</h2>
+            <ul class="dropdown-content">
+                <li><a href="GingerBoy/ginger%20boy%201.pdf" download>Ginger Boy 1</a></li>
+                <li><a href="GingerBoy/ginger%20boy%202.pdf" download>Ginger Boy 2</a></li>
+                <li><a href="GingerBoy/ginger%20boy%204.pdf" download>Ginger Boy 4</a></li>
+                <li><a href="GingerBoy/gingerboy%205.pdf" download>Ginger Boy 5</a></li>
+                <li><a href="GingerBoy/Ginger%20Boy%207.pdf" download>Ginger Boy 7</a></li>
+                <li><a href="GingerBoy/Ginger%20Boy%208.pdf" download>Ginger Boy 8</a></li>
+            </ul>
+        </div>
+    </section>
+</main>
+<footer>
+    <p>&copy; 2024 D'Abreu Comics. Todos los derechos reservados.</p>
+</footer>
+<script>
+    document.querySelectorAll('.download-item h2').forEach(item => {
+        item.addEventListener('click', () => {
+            const dropdown = item.nextElementSibling;
+            dropdown.classList.toggle('show');
+        });
+    });
+</script>
+</body>
+</html>
