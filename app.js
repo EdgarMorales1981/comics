@@ -8,7 +8,7 @@ document.querySelectorAll('.download-item h2').forEach(item => {
 });
 
 listado =[{
-    imagen:'./images/brunobrunner.jpg',
+    imagen:'./images/brunoBrunner.jpg',
     title: 'Bruno Brunner',
 },
     {
