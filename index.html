@@ -25,10 +25,8 @@
     </section>
     <section class="gallery">
         <div class="gallery-item">
-     <div class="titulo-foto"></div>
-           <div class="fotoimagen">
-
-           </div>
+            <div class="titulo-foto"></div>
+            <div class="fotoimagen"></div>
         </div>
     </section>
     <section class="downloads">
@@ -38,29 +36,7 @@
                 Nuevo!!!
             </h2>
             <ul class="dropdown-content">
-                <li><a href="nuevo/Bruno%20Brunner%20%231.pdf" download>Bruno Brunner</a></li>
-                <!-- Agrega más enlaces aquí -->
-            </ul>
-        </div>
-        <div class="download-item">
-            <h2>
-                <img src="images/queers.png" alt="Ciclo Queer" class="section-icon">
-                Ciclo Queer
-            </h2>
-            <ul class="dropdown-content">
-                <li><a href="Queers/SimonX%231.pdf">Ciclo Queer 1</a></li>
-                <li><a href="Queers/Queerx2.pdf">Ciclo Queer 2</a></li>
-            </ul>
-        </div>
-        <div class="download-item">
-            <h2>
-                <img src="images/familiar.png" alt="Toda la Familia" class="section-icon">
-                Toda la Familia
-            </h2>
-            <ul class="dropdown-content">
-                <li><a href="Familiar/The%20Thomsons%20%231.pdf" download>The Thomsons 1</a></li>
-                <li><a href="Familiar/The%20Thomsons%20%232.pdf" download>The Thomsons 2</a></li>
-                <!-- Agrega más enlaces aquí -->
+                <li><a class="libro" href="nuevo/Bruno%20Brunner%20%231.pdf" download>Bruno Brunner</a></li>
             </ul>
         </div>
         <div class="download-item">
@@ -70,7 +46,6 @@
             </h2>
             <ul class="dropdown-content">
                 <li><a href="Suspenso/Corazón%20de%20Cristal%201%20.pdf" download>Corazon de Cristal</a></li>
-
             </ul>
         </div>
         <div class="download-item">
@@ -79,10 +54,8 @@
                 Comedias +16
             </h2>
             <ul class="dropdown-content">
-                <li><a href="comedias+16/GBuenasvibras.pdf" download>George Buenas Vibras</a></li>
                 <li><a href="comedias+16/FabioLiebre1.pdf" download>Fabio Liebre 1</a></li>
                 <li><a href="comedias+16/FabioLiebre2.pdf" download>Fabio Liebre 2</a></li>
-                <li><a href="comedias+16/RyanBryan.pdf" download>Ryan y Bryan</a></li>
             </ul>
         </div>
         <div class="download-item">
@@ -93,21 +66,104 @@
             <ul class="dropdown-content">
                 <li><a href="GingerBoy/ginger%20boy%201.pdf" download>Ginger Boy 1</a></li>
                 <li><a href="GingerBoy/ginger%20boy%202.pdf" download>Ginger Boy 2</a></li>
-                <li><a href="GingerBoy/ginger%20boy%204.pdf" download>Ginger Boy 4</a></li>
-                <li><a href="GingerBoy/gingerboy%205.pdf" download>Ginger Boy 5</a></li>
-                <li><a href="GingerBoy/Ginger%20Boy%206.pdf" download>Ginger Boy 6</a></li>
-                <li><a href="GingerBoy/Ginger%20Boy%207.pdf" download>Ginger Boy 7</a></li>
-                <li><a href="GingerBoy/Ginger%20Boy%208.pdf" download>Ginger Boy 8</a></li>
             </ul>
-
         </div>
     </section>
+    <section class="downloads-stats">
+        <h2>Estadísticas de Descargas</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Archivo</th>
+                <th>Total de Descargas</th>
+            </tr>
+            </thead>
+            <tbody id="downloads-list">
+            <!-- Aquí se cargarán los datos desde Firestore -->
+            </tbody>
+        </table>
+    </section>
 </main>
+
 <footer>
     <p>&copy; 2024 D'Abreu Comics. Todos los derechos reservados.</p>
 </footer>
-<script src="app.js">
+<script src="app.js"></script>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
+    const firebaseConfig = {
+        apiKey: "AIzaSyDOg4snqofyY5J-o2eHbRf0LTwAKI9urp0",
+        authDomain: "comics-961a3.firebaseapp.com",
+        projectId: "comics-961a3",
+        storageBucket: "comics-961a3.appspot.com",
+        messagingSenderId: "97443993238",
+        appId: "1:97443993238:web:deeb021ef57a91721f54b7"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Función para registrar la descarga en Firestore
+    async function registrarDescarga(fileName) {
+        try {
+            const docRef = await addDoc(collection(db, "downloads"), {
+                filename: fileName,
+                downloaded_at: new Date().toISOString()
+            });
+            console.log("Descarga registrada con ID: ", docRef.id);
+        } catch (e) {
+            console.error("Error al registrar la descarga: ", e);
+        }
+    }
+
+    // Capturar los eventos de descarga
+    document.querySelectorAll('a[download]').forEach(anchor => {
+        anchor.addEventListener('click', function () {
+            const fileName = anchor.textContent.trim(); // Obtener el texto legible del enlace
+            registrarDescarga(fileName);
+        });
+    });
+
+    async function obtenerDatosDescargas() {
+        const querySnapshot = await getDocs(collection(db, "downloads"));
+        const descargas = {};
+
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            const filename = data.filename;
+
+            if (descargas[filename]) {
+                descargas[filename]++;
+            } else {
+                descargas[filename] = 1;
+            }
+        });
+
+        mostrarDatos(descargas);
+    }
+
+    function mostrarDatos(descargas) {
+        const downloadsList = document.getElementById("downloads-list");
+        downloadsList.innerHTML = "";
+
+        for (const [filename, total] of Object.entries(descargas)) {
+            const row = document.createElement("tr");
+
+            const filenameCell = document.createElement("td");
+            filenameCell.textContent = filename;
+
+            const totalCell = document.createElement("td");
+            totalCell.textContent = total;
+
+            row.appendChild(filenameCell);
+            row.appendChild(totalCell);
+
+            downloadsList.appendChild(row);
+        }
+    }
+    obtenerDatosDescargas()
 </script>
 </body>
 </html>

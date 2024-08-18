@@ -238,3 +238,52 @@ footer {
     margin-left: -160px;
 
 }
+
+.downloads-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    margin: 40px auto;
+    background-color: #333; /* Color de fondo oscuro */
+    color: white; /* Texto en color blanco */
+    border-radius: 10px; /* Bordes redondeados para darle un aspecto más moderno */
+    width: 80%; /* Limita el ancho de la sección */
+    max-width: 800px; /* Máximo ancho */
+}
+
+.downloads-stats h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #FFD700; /* Título en un color dorado suave */
+}
+
+.downloads-stats table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.downloads-stats th, .downloads-stats td {
+    padding: 15px;
+    border: 1px solid #555;
+}
+
+.downloads-stats th {
+    background-color: #444;
+    color: #FFD700;
+}
+
+.downloads-stats td {
+    background-color: #222;
+    color: white;
+}
+
+.downloads-stats tr:nth-child(even) {
+    background-color: #3a3a3a;
+}
+
+.downloads-stats tr:hover {
+    background-color: #555;
+}
