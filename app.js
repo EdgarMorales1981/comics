@@ -1,4 +1,3 @@
-/ Manejar el menú desplegable
 document.querySelectorAll('.download-item h2').forEach(item => {
     item.addEventListener('click', () => {
         const dropdown = item.nextElementSibling;
@@ -57,11 +56,6 @@ setInterval(cambiarImagen, 5000); // Cambiar imagen cada 5 segundos
 
 // Iniciar con la primera imagen
 cambiarImagen();
-
-
-
-// Llamar a la función para obtener y mostrar los datos
-
 
 
 
