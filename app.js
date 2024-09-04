@@ -1,3 +1,4 @@
+// Manejar el menú desplegable
 document.querySelectorAll('.download-item h2').forEach(item => {
     item.addEventListener('click', () => {
         const dropdown = item.nextElementSibling;
@@ -29,10 +30,12 @@ const contenedor = document.querySelector('.fotoimagen');
 let index = 0;
 
 // Agregar la imagen estática de Hortensio al contenedor una vez
-const imgHortensio = document.createElement('img');
-imgHortensio.src = './images/hortensio.png';
-imgHortensio.className = 'imagenHortensio'; // Puedes definir un estilo para esta imagen si lo necesitas
-contenedor.appendChild(imgHortensio); // Agregar la imagen hortensio una vez y no se elimina
+if (!contenedor.querySelector('.imagenHortensio')) {
+    const imgHortensio = document.createElement('img');
+    imgHortensio.src = './images/hortensio.png';
+    imgHortensio.className = 'imagenHortensio'; // Define un estilo para esta imagen si lo necesitas
+    contenedor.appendChild(imgHortensio);
+}
 
 function cambiarImagen() {
     // Limpiar el contenido dinámico pero mantener la imagen de Hortensio
@@ -46,17 +49,16 @@ function cambiarImagen() {
     img.className = 'imagenDinamica';
     titulo.className = 'tituloFoto';
 
+    // Agregar los elementos dinámicos
     contenedor.appendChild(titulo);
     contenedor.appendChild(img);
 
-    index = (index + 1) % listado.length; // Avanzar al siguiente índice, y volver al inicio si es necesario
+    // Avanzar al siguiente índice y reiniciar si es necesario
+    index = (index + 1) % listado.length;
 }
 
-setInterval(cambiarImagen, 5000); // Cambiar imagen cada 5 segundos
+// Cambiar imagen cada 5 segundos
+setInterval(cambiarImagen, 5000);
 
 // Iniciar con la primera imagen
 cambiarImagen();
-
-
-
-// Llamar a la función para obtener y mostrar los datos

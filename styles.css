@@ -287,3 +287,8 @@ footer {
 .downloads-stats tr:hover {
     background-color: #555;
 }
+
+
+.fotoimagen img {
+    margin: 10px; /* Puedes ajustar el valor de padding según lo necesites */
+}
